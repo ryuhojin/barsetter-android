@@ -65,8 +65,6 @@ https://barsetter.local/index.html?source=local
 Requests are intercepted inside the app:
 
 - `/index.html` and `/assets/*` are served from `assets/www`.
-- `/fonts/*` is served from `assets/www` so the embedded WebView uses the same
-  bundled menu font as the web version.
 - `/local/menu.json` is served from app internal storage.
 - If no downloaded menu exists yet, the app falls back to the bundled
   `assets/www/json/baro.json` sample.
