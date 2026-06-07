@@ -3,12 +3,17 @@ package com.barsetter.localmenu
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Activity
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.pm.ApplicationInfo
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputType
+import android.text.TextWatcher
+import android.util.Base64
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +25,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -34,6 +40,7 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 import java.security.KeyStore
 import java.security.cert.CertificateFactory
+import java.util.Locale
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
@@ -47,7 +54,9 @@ class MainActivity : Activity() {
     private lateinit var launcherView: LinearLayout
     private lateinit var launcherButton: Button
     private lateinit var launcherStatusText: TextView
+    private lateinit var barCodeInput: EditText
 
+    private val preferences: SharedPreferences by lazy { getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE) }
     private val menuDir: File by lazy { File(filesDir, "menu") }
     private val menuFile: File by lazy { File(menuDir, "menu.json") }
     private val legacyTlsSocketFactory: SSLSocketFactory by lazy { createLegacyTlsSocketFactory() }
@@ -58,7 +67,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         buildUi()
         configureWebView()
-        if (menuFile.exists()) {
+        if (hasStoredBarCode() && menuFile.exists()) {
             showMenu()
         } else {
             showLauncher()
@@ -115,19 +124,47 @@ class MainActivity : Activity() {
         }
 
         val titleText = TextView(this).apply {
-            text = "BARO"
-            textSize = 36f
+            text = "barsetter"
+            textSize = 34f
             setTextColor(Color.rgb(23, 21, 18))
             typeface = Typeface.DEFAULT_BOLD
             gravity = Gravity.CENTER
         }
 
         val subtitleText = TextView(this).apply {
-            text = "로컬 메뉴판"
+            text = "바 코드를 입력해 메뉴판을 설정하세요."
             textSize = 14f
             setTextColor(Color.rgb(123, 115, 104))
             gravity = Gravity.CENTER
-            setPadding(0, dp(8), 0, dp(22))
+            setPadding(0, dp(8), 0, dp(18))
+        }
+
+        val inputLabel = TextView(this).apply {
+            text = "바 코드"
+            textSize = 13f
+            setTextColor(Color.rgb(123, 115, 104))
+            gravity = Gravity.CENTER
+            setPadding(0, 0, 0, dp(6))
+        }
+
+        barCodeInput = EditText(this).apply {
+            setSingleLine(true)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+            hint = DEFAULT_BAR_CODE
+            setText(selectedBarCode().ifBlank { DEFAULT_BAR_CODE })
+            setSelectAllOnFocus(true)
+            textSize = 18f
+            gravity = Gravity.CENTER
+            setTextColor(Color.rgb(23, 21, 18))
+            setHintTextColor(Color.rgb(156, 146, 134))
+            setPadding(dp(14), 0, dp(14), 0)
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    updateLauncherCopy()
+                }
+                override fun afterTextChanged(s: Editable?) = Unit
+            })
         }
 
         launcherButton = Button(this).apply {
@@ -135,13 +172,7 @@ class MainActivity : Activity() {
             setBackgroundColor(Color.rgb(23, 21, 18))
             minHeight = dp(50)
             setPadding(dp(22), 0, dp(22), 0)
-            setOnClickListener {
-                if (menuFile.exists()) {
-                    showMenu()
-                } else {
-                    downloadMenu(openWhenDone = true)
-                }
-            }
+            setOnClickListener { handleLauncherButtonClick() }
         }
 
         launcherStatusText = TextView(this).apply {
@@ -153,6 +184,16 @@ class MainActivity : Activity() {
 
         launcherView.addView(titleText)
         launcherView.addView(subtitleText)
+        launcherView.addView(inputLabel)
+        launcherView.addView(
+            barCodeInput,
+            LinearLayout.LayoutParams(
+                dp(260),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                bottomMargin = dp(18)
+            }
+        )
         launcherView.addView(
             launcherButton,
             LinearLayout.LayoutParams(
@@ -189,6 +230,9 @@ class MainActivity : Activity() {
     }
 
     private fun showLauncher() {
+        if (::barCodeInput.isInitialized && barCodeInput.text?.toString().orEmpty().isBlank()) {
+            barCodeInput.setText(selectedBarCode().ifBlank { DEFAULT_BAR_CODE })
+        }
         updateLauncherCopy()
         launcherView.visibility = View.VISIBLE
         webView.visibility = View.GONE
@@ -208,11 +252,48 @@ class MainActivity : Activity() {
     }
 
     private fun updateLauncherCopy(message: String? = null) {
-        launcherButton.text = if (menuFile.exists()) "바로 메뉴판 보기" else "바로 메뉴판 다운로드 하기"
-        launcherStatusText.text = message ?: if (menuFile.exists()) {
-            "저장된 메뉴판이 있습니다."
+        if (!::launcherButton.isInitialized || !::launcherStatusText.isInitialized) return
+
+        val typedCode = normalizedBarCodeInput()
+        val typedSlug = decodedSlugFromBarCode(typedCode)
+        val isStoredSelection = typedCode.isNotBlank() &&
+            typedCode == selectedBarCode() &&
+            typedSlug.isNotBlank() &&
+            typedSlug == selectedBarSlug()
+        val canOpenStoredMenu = menuFile.exists() && hasStoredBarCode() && isStoredSelection
+
+        launcherButton.text = if (canOpenStoredMenu) "메뉴판 보기" else "메뉴판 다운로드 하기"
+        launcherStatusText.text = message ?: when {
+            typedCode.isBlank() -> "바 코드를 입력하세요. 예: $DEFAULT_BAR_CODE"
+            typedSlug.isBlank() -> "바 코드를 확인하세요. 예: $DEFAULT_BAR_CODE"
+            canOpenStoredMenu -> "${currentMenuBarName().ifBlank { selectedBarSlug() }} 메뉴판이 저장되어 있습니다."
+            menuFile.exists() && selectedBarSlug().isNotBlank() && typedSlug != selectedBarSlug() -> {
+                "입력한 바 코드로 새 메뉴판을 다운로드합니다."
+            }
+            else -> "다운로드 후 전체화면 메뉴판이 열립니다."
+        }
+    }
+
+    private fun handleLauncherButtonClick() {
+        val selection = barSelectionFromInput() ?: run {
+            updateLauncherCopy("바 코드를 확인하세요. 예: $DEFAULT_BAR_CODE")
+            return
+        }
+        val previousSlug = selectedBarSlug()
+        val selectionChanged = selection.slug != previousSlug || selection.code != selectedBarCode()
+
+        if (selectionChanged) {
+            storeBarSelection(selection)
+            if (menuFile.exists()) menuFile.delete()
+            webViewLoaded = false
+        } else if (!hasStoredBarCode()) {
+            storeBarSelection(selection)
+        }
+
+        if (menuFile.exists() && !selectionChanged) {
+            showMenu()
         } else {
-            "다운로드 후 전체화면 메뉴판이 열립니다."
+            downloadMenu(openWhenDone = true)
         }
     }
 
@@ -243,7 +324,17 @@ class MainActivity : Activity() {
         if (menuFile.exists()) {
             return WebResourceResponse("application/json", "utf-8", FileInputStream(menuFile))
         }
-        return assetResponse("www/json/baro.json")
+        return bundledMenuResponse()
+    }
+
+    private fun bundledMenuResponse(): WebResourceResponse {
+        val slug = selectedBarSlug().ifBlank { DEFAULT_BAR_SLUG }
+        val assetPath = "www/json/$slug.json"
+        return try {
+            WebResourceResponse("application/json", "utf-8", assets.open(assetPath))
+        } catch (_: Exception) {
+            assetResponse("www/json/$DEFAULT_BAR_SLUG.json")
+        }
     }
 
     private fun assetResponse(assetPath: String): WebResourceResponse {
@@ -271,6 +362,16 @@ class MainActivity : Activity() {
             Toast.makeText(this, "메뉴판을 다운로드하는 중입니다.", Toast.LENGTH_SHORT).show()
             return
         }
+        if (!hasStoredBarCode()) {
+            val selection = barSelectionFromInput()
+            if (selection == null) {
+                showLauncher()
+                updateLauncherCopy("바 코드를 먼저 입력하세요. 예: $DEFAULT_BAR_CODE")
+                return
+            }
+            storeBarSelection(selection)
+        }
+
         isDownloading = true
         launcherButton.isEnabled = false
         if (launcherView.visibility == View.VISIBLE) {
@@ -281,8 +382,11 @@ class MainActivity : Activity() {
 
         executor.execute {
             val result = runCatching {
-                val jsonText = downloadText(DEFAULT_MENU_SOURCE_URL)
+                val jsonText = downloadText(menuSourceUrl())
                 val parsed = JSONObject(jsonText)
+                parsed.optJSONObject("bar")?.optString("slug").orEmpty().takeIf { isValidSlug(it) }?.let { slug ->
+                    preferences.edit().putString(KEY_BAR_SLUG, slug).apply()
+                }
                 writeMenu(jsonText)
                 val barName = parsed.optJSONObject("bar")?.optString("name").orEmpty()
                 val version = parsed.optInt("version", 0)
@@ -312,9 +416,15 @@ class MainActivity : Activity() {
 
     private fun confirmMenuRefresh() {
         if (isFinishing) return
+        if (!hasStoredBarCode()) {
+            showLauncher()
+            updateLauncherCopy("바 코드를 먼저 입력하세요. 예: $DEFAULT_BAR_CODE")
+            return
+        }
+        val barName = currentMenuBarName().ifBlank { selectedBarSlug() }
         val dialog = AlertDialog.Builder(this)
             .setTitle("메뉴판 갱신")
-            .setMessage("BARO 메뉴판을 다시 다운로드할까요?")
+            .setMessage("${barName.ifBlank { "현재 바" }} 메뉴판을 다시 다운로드할까요?")
             .setNegativeButton("취소", null)
             .setPositiveButton("갱신") { _, _ -> downloadMenu(openWhenDone = true) }
             .create()
@@ -361,7 +471,86 @@ class MainActivity : Activity() {
 
     private fun readMenuText(): String {
         if (menuFile.exists()) return menuFile.readText(StandardCharsets.UTF_8)
-        return String(assets.open("www/json/baro.json").use(InputStream::readBytes), StandardCharsets.UTF_8)
+        return readBundledMenuText()
+    }
+
+    private fun readBundledMenuText(): String {
+        val slug = selectedBarSlug().ifBlank { DEFAULT_BAR_SLUG }
+        return runCatching {
+            String(assets.open("www/json/$slug.json").use(InputStream::readBytes), StandardCharsets.UTF_8)
+        }.getOrElse {
+            String(assets.open("www/json/$DEFAULT_BAR_SLUG.json").use(InputStream::readBytes), StandardCharsets.UTF_8)
+        }
+    }
+
+    private fun currentMenuBarName(): String {
+        return runCatching {
+            JSONObject(readMenuText()).optJSONObject("bar")?.optString("name").orEmpty()
+        }.getOrDefault("")
+    }
+
+    private fun barSelectionFromInput(): BarSelection? {
+        val code = normalizedBarCodeInput()
+        val slug = decodedSlugFromBarCode(code)
+        return if (code.isNotBlank() && slug.isNotBlank()) BarSelection(code, slug) else null
+    }
+
+    private fun normalizedBarCodeInput(): String {
+        if (!::barCodeInput.isInitialized) return selectedBarCode()
+        return normalizeBarCode(barCodeInput.text?.toString().orEmpty())
+    }
+
+    private fun normalizeBarCode(rawCode: String): String {
+        var code = rawCode.trim()
+        if (code.contains("://")) {
+            code = runCatching { Uri.parse(code).lastPathSegment.orEmpty() }.getOrDefault(code)
+        }
+        return code
+            .substringBefore("?")
+            .substringBefore("#")
+            .trim()
+            .trim('/')
+    }
+
+    private fun decodedSlugFromBarCode(code: String): String {
+        if (code.isBlank()) return ""
+        val normalized = code.replace('-', '+').replace('_', '/')
+        val padded = normalized + "=".repeat((4 - normalized.length % 4) % 4)
+        return runCatching {
+            val decoded = String(Base64.decode(padded, Base64.DEFAULT), StandardCharsets.UTF_8)
+                .trim()
+                .lowercase(Locale.US)
+            decoded.takeIf { isValidSlug(it) }.orEmpty()
+        }.getOrDefault("")
+    }
+
+    private fun selectedBarCode(): String {
+        return preferences.getString(KEY_BAR_CODE, "").orEmpty()
+    }
+
+    private fun selectedBarSlug(): String {
+        val storedSlug = preferences.getString(KEY_BAR_SLUG, "").orEmpty()
+        if (isValidSlug(storedSlug)) return storedSlug
+        return decodedSlugFromBarCode(selectedBarCode())
+    }
+
+    private fun hasStoredBarCode(): Boolean {
+        return selectedBarCode().isNotBlank() && selectedBarSlug().isNotBlank()
+    }
+
+    private fun storeBarSelection(selection: BarSelection) {
+        preferences.edit()
+            .putString(KEY_BAR_CODE, selection.code)
+            .putString(KEY_BAR_SLUG, selection.slug)
+            .apply()
+    }
+
+    private fun menuSourceUrl(): String {
+        return "$MENU_SOURCE_BASE_URL${Uri.encode(selectedBarSlug())}.json"
+    }
+
+    private fun isValidSlug(slug: String): Boolean {
+        return slug.isNotBlank() && BAR_SLUG_PATTERN.matches(slug)
     }
 
     private fun mimeType(path: String): String {
@@ -404,7 +593,7 @@ class MainActivity : Activity() {
 
     inner class AndroidBridge {
         @JavascriptInterface
-        fun menuSlug(): String = "__barsetter_local__"
+        fun menuSlug(): String = selectedBarSlug().ifBlank { DEFAULT_BAR_SLUG }
 
         @JavascriptInterface
         fun readMenuJson(): String = readMenuText()
@@ -422,9 +611,17 @@ class MainActivity : Activity() {
         }
     }
 
+    private data class BarSelection(val code: String, val slug: String)
+
     companion object {
         private const val LOCAL_HOST = "barsetter.local"
         private const val LOCAL_ORIGIN = "https://barsetter.local"
-        private const val DEFAULT_MENU_SOURCE_URL = "https://barsetter-client.pages.dev/json/baro.json"
+        private const val PREFERENCES_NAME = "barsetter_local_menu"
+        private const val KEY_BAR_CODE = "bar_code"
+        private const val KEY_BAR_SLUG = "bar_slug"
+        private const val DEFAULT_BAR_CODE = "YmFybw"
+        private const val DEFAULT_BAR_SLUG = "baro"
+        private const val MENU_SOURCE_BASE_URL = "https://barsetter-client.pages.dev/json/"
+        private val BAR_SLUG_PATTERN = Regex("^[a-z0-9가-힣_-]+$")
     }
 }

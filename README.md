@@ -69,15 +69,16 @@ Requests are intercepted inside the app:
 - If no downloaded menu exists yet, the app falls back to the bundled
   `assets/www/json/baro.json` sample.
 
-On first launch, the app shows a menu download button. After the menu JSON is
-stored, later launches skip the download screen and open the full-screen WebView
-menu directly. Long-press the BARO title inside the menu to refresh the stored
-menu.
+On first launch, the app asks for an encoded bar code such as `YmFybw`. The
+code decodes to the menu slug (`baro`) and the app downloads that bar's JSON.
+After the menu JSON is stored, later launches skip the setup screen and open the
+full-screen WebView menu directly. Long-press the bar title inside the menu to
+refresh the stored menu for the selected bar.
 
-The default download source is:
+Menu JSON is downloaded from:
 
 ```txt
-https://barsetter-client.pages.dev/json/baro.json
+https://barsetter-client.pages.dev/json/{slug}.json
 ```
 
 Later, this URL should be replaced by a Barsetter admin/device-token endpoint.
