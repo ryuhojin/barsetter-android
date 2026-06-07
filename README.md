@@ -69,8 +69,12 @@ Requests are intercepted inside the app:
 - If no downloaded menu exists yet, the app falls back to the bundled
   `assets/www/json/baro.json` sample.
 
-Use the source URL field at the top of the app to download a menu JSON file. The
-default source is:
+On first launch, the app shows a menu download button. After the menu JSON is
+stored, later launches skip the download screen and open the full-screen WebView
+menu directly. Long-press the BARO title inside the menu to refresh the stored
+menu.
+
+The default download source is:
 
 ```txt
 https://barsetter-client.pages.dev/json/baro.json

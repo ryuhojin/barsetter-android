@@ -58,7 +58,11 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         buildUi()
         configureWebView()
-        showLauncher()
+        if (menuFile.exists()) {
+            showMenu()
+        } else {
+            showLauncher()
+        }
     }
 
     override fun onDestroy() {
