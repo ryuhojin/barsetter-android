@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": 17,
-  "generated_at": "2026-06-07T13:15:37.299Z",
+  "version": 18,
+  "generated_at": "2026-06-07T14:35:18.258Z",
   "bar": {
     "id": "28754067-952c-4f89-9618-62d358bb7566",
     "name": "BARO",
@@ -3641,8 +3641,8 @@
               "description": "",
               "tasting_notes": "",
               "details": {},
-              "is_featured": 0,
-              "is_top_featured": 0,
+              "is_featured": 1,
+              "is_top_featured": 1,
               "servings": []
             },
             {
