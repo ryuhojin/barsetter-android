@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": 15,
-  "generated_at": "2026-06-06T00:22:27.050Z",
+  "version": 17,
+  "generated_at": "2026-06-07T13:15:37.299Z",
   "bar": {
     "id": "28754067-952c-4f89-9618-62d358bb7566",
     "name": "BARO",
@@ -58,18 +58,19 @@
               "unit": "bottle",
               "list_price_label": "glass",
               "image": {
-                "url": "https://res.cloudinary.com/dyrkszrds/image/upload/v1780705323/barsetter/28754067-952c-4f89-9618-62d358bb7566/products/43b7950f-7cc6-490c-93b6-f2bce72c35b9.webp",
+                "url": "https://res.cloudinary.com/dyrkszrds/image/upload/v1780707757/barsetter/28754067-952c-4f89-9618-62d358bb7566/products/43b7950f-7cc6-490c-93b6-f2bce72c35b9.webp",
                 "public_id": "barsetter/28754067-952c-4f89-9618-62d358bb7566/products/43b7950f-7cc6-490c-93b6-f2bce72c35b9",
                 "width": 750,
                 "height": 750,
                 "bytes": 31168,
                 "format": "webp",
-                "updated_at": "2026-06-06T00:22:04.486Z"
+                "updated_at": "2026-06-06T01:02:38.569Z"
               },
               "description": "",
               "tasting_notes": "포도",
               "details": {},
-              "is_featured": 0,
+              "is_featured": 1,
+              "is_top_featured": 1,
               "servings": [
                 {
                   "label": "half",
@@ -80,7 +81,7 @@
                 {
                   "label": "glass",
                   "serving_ml": 30,
-                  "price": 25000,
+                  "price": 24000,
                   "sort_order": 1
                 },
                 {
@@ -116,6 +117,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 1,
               "servings": [
                 {
                   "label": "half",
@@ -162,6 +164,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -208,6 +211,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -254,6 +258,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -300,6 +305,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -346,6 +352,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -392,6 +399,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -438,6 +446,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -484,6 +493,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -530,6 +540,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -576,6 +587,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -622,6 +634,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -668,6 +681,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -714,6 +728,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -760,6 +775,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -821,6 +837,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -867,6 +884,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -913,6 +931,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -959,6 +978,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1005,6 +1025,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1051,6 +1072,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1097,6 +1119,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1143,6 +1166,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1189,6 +1213,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1235,6 +1260,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1281,6 +1307,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1327,6 +1354,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1373,6 +1401,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1419,6 +1448,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1465,6 +1495,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1511,6 +1542,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1557,6 +1589,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1603,6 +1636,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1649,6 +1683,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1695,6 +1730,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1741,6 +1777,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1787,6 +1824,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1833,6 +1871,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1879,6 +1918,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1933,6 +1973,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -1979,6 +2020,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2025,6 +2067,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2071,6 +2114,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2117,6 +2161,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2163,6 +2208,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2209,6 +2255,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2255,6 +2302,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2301,6 +2349,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2347,6 +2396,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2393,6 +2443,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2439,6 +2490,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2485,6 +2537,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2531,6 +2584,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2577,6 +2631,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2623,6 +2678,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2669,6 +2725,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2715,6 +2772,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2761,6 +2819,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2807,6 +2866,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2853,6 +2913,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2899,6 +2960,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2945,6 +3007,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -2991,6 +3054,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3037,6 +3101,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3083,6 +3148,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3129,6 +3195,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3175,6 +3242,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3221,6 +3289,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3267,6 +3336,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3313,6 +3383,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3359,6 +3430,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3405,6 +3477,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3451,6 +3524,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3505,6 +3579,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": [
                 {
                   "label": "half",
@@ -3567,6 +3642,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3594,6 +3670,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3621,6 +3698,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             }
           ]
@@ -3656,6 +3734,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3683,6 +3762,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3710,6 +3790,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3737,6 +3818,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3764,6 +3846,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3791,6 +3874,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3818,6 +3902,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3845,6 +3930,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3872,6 +3958,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3899,6 +3986,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             },
             {
@@ -3926,6 +4014,7 @@
               "tasting_notes": "",
               "details": {},
               "is_featured": 0,
+              "is_top_featured": 0,
               "servings": []
             }
           ]
