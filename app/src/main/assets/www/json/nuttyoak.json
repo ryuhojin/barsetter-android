@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "version": 3,
+  "generated_at": "2026-06-06T07:31:55.550Z",
+  "bar": {
+    "id": "543bca85-d752-4401-854c-a5e535b21042",
+    "name": "NuttyOak",
+    "slug": "nuttyoak",
+    "bar_type": "malt",
+    "description": "지칠때까지",
+    "website_url": "https://www.instagram.com/nuttyoak_bar/"
+  },
+  "presentation": {
+    "style": "clean",
+    "theme": {
+      "variant": "malt",
+      "accent": "#10941f"
+    },
+    "features": {
+      "showFeatured": true,
+      "showCombos": true,
+      "showDescriptions": true,
+      "showTastingNotes": true,
+      "showServingDetails": true
+    }
+  },
+  "categories": [
+    {
+      "id": "36ab631b-2e5c-4f98-9bf6-bd2d2b25931a",
+      "name": "Spirits",
+      "slug": "spirits",
+      "sort_order": 0,
+      "subcategories": []
+    },
+    {
+      "id": "9a8b1a9f-f8c2-4a3b-a39f-698ddfd4b19f",
+      "name": "Cocktails",
+      "slug": "cocktails",
+      "sort_order": 1,
+      "subcategories": []
+    },
+    {
+      "id": "7773187a-a895-42ab-b9df-0dab7f3a2fda",
+      "name": "Etc",
+      "slug": "etc",
+      "sort_order": 2,
+      "subcategories": []
+    }
+  ],
+  "combos": []
+}
