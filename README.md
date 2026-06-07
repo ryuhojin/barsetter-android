@@ -38,6 +38,22 @@ The debug APK is written under:
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
+For service sideloading, build the release-signed APK:
+
+```bash
+./scripts/sync-client.sh
+./scripts/build-release.sh
+```
+
+The release APK is written as:
+
+```txt
+barsetter.apk
+```
+
+The first release build creates a local signing key under `.signing/`. Keep that
+directory backed up because future APK updates must use the same signing key.
+
 ## Runtime
 
 The WebView loads:

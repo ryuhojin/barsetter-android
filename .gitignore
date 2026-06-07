@@ -1,9 +1,12 @@
 .gradle/
 .gradle-local/
+.signing/
 .kotlin/
 build/
 local.properties
 app/build/
+barsetter.apk
+*.jks
 *.apk
 *.aab
 *.iml
