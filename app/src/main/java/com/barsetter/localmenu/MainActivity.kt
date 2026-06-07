@@ -314,6 +314,7 @@ class MainActivity : Activity() {
         return when {
             path == "/" || path == "/index.html" -> assetResponse("www/index.html")
             path.startsWith("/assets/") -> assetResponse("www$path")
+            path.startsWith("/fonts/") -> assetResponse("www$path")
             path.startsWith("/json/") -> assetResponse("www$path")
             path == "/local/menu.json" -> localMenuResponse()
             else -> notFoundResponse()
@@ -559,6 +560,8 @@ class MainActivity : Activity() {
             path.endsWith(".js") -> "application/javascript"
             path.endsWith(".css") -> "text/css"
             path.endsWith(".json") -> "application/json"
+            path.endsWith(".woff2") -> "font/woff2"
+            path.endsWith(".woff") -> "font/woff"
             path.endsWith(".svg") -> "image/svg+xml"
             path.endsWith(".png") -> "image/png"
             path.endsWith(".webp") -> "image/webp"
